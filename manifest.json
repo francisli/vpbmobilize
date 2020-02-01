@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Virtual Phone Bank <-> Mobilize",
+  "description": "Auto-fills Mobilize event forms from Virtual Phone Bank contact info.",
+  "version": "1.0",
+  "icons": {
+    "228": "icons/birdie.webp"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.votebuilder.com/ContactDetailScript.aspx*"
+      ],
+      "js": ["votebuilder.js"]
+    },
+    {
+      "matches": [
+        "https://events.berniesanders.com/event/*"
+      ],
+      "js": ["mobilize.js"]
+    }
+  ]
+}
