@@ -6,7 +6,6 @@ let data = {
   zip: ""
 };
 browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-  console.log(message, sender);
   if (sender.url.startsWith("https://www.votebuilder.com") || sender.url.startsWith("https://www.openvpb.com")) {
     //// store updated contact info
     data = message;
