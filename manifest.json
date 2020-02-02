@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Virtual Phone Bank <-> Mobilize",
   "description": "Auto-fills Mobilize event forms from Virtual Phone Bank contact info.",
-  "version": "1.1",
+  "version": "1.2",
   "icons": {
     "228": "icons/birdie.webp"
   },
@@ -10,26 +10,38 @@
     "tabs"
   ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "browser-polyfill.js",
+      "background.js"
+    ]
   },
   "content_scripts": [
     {
       "matches": [
         "https://www.votebuilder.com/ContactDetailScript.aspx*"
       ],
-      "js": ["votebuilder.js"]
+      "js": [
+        "browser-polyfill.js",
+        "votebuilder.js"
+      ]
     },
     {
       "matches": [
         "https://www.openvpb.com/VirtualPhoneBank/LoggedIn/*"
       ],
-      "js": ["openvpb.js"]
+      "js": [
+        "browser-polyfill.js",
+        "openvpb.js"
+      ]
     },
     {
       "matches": [
         "https://events.berniesanders.com/event/*"
       ],
-      "js": ["mobilize.js"]
+      "js": [
+        "browser-polyfill.js",
+        "mobilize.js"
+      ]
     }
   ]
 }
