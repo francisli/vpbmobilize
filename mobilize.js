@@ -1,4 +1,5 @@
 function setValue(input, newValue) {
+  // https://github.com/facebook/react/issues/11488
   let lastValue = input.value;
   input.value = newValue;
   let event = new Event('input', { bubbles: true });
