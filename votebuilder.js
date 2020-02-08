@@ -1,5 +1,4 @@
-//// execute after a delay, due to async data loading after page load
-setTimeout(function() {
+function scrape() {
   const data = {
     firstName: "",
     lastName: "",
@@ -10,8 +9,12 @@ setTimeout(function() {
   //// extract name
   const personPhonePanel = document.querySelector(".person-phone-panel h1 span");
   if (personPhonePanel) {
-    const name = personPhonePanel.innerText;
+    let name = personPhonePanel.innerText;
     if (name) {
+      const index = name.indexOf("–");
+      if (index >= 0) {
+        name = name.substring(0, index).trim();
+      }
       const tokens = name.split(" ");
       if (tokens.length > 0) {
         data.firstName = tokens[0];
@@ -20,6 +23,9 @@ setTimeout(function() {
         data.lastName = tokens[tokens.length - 1];
       }
     }
+  } else {
+    setTimeout(scrape, 1000);
+    return;
   }
   //// extract phone number and zip
   const additionalInfoTable = document.querySelectorAll("#spanTableAdditionalInfo .input-unit");
@@ -52,4 +58,7 @@ setTimeout(function() {
   }
   //// send to background script
   browser.runtime.sendMessage(data)
-}, 1000);
+}
+
+//// execute after a delay, due to async data loading after page load
+setTimeout(scrape, 1000);

@@ -13,11 +13,18 @@ function setValue(input, newValue) {
   input.dispatchEvent(event);
 }
 
-browser.runtime.sendMessage({}).then(function(data) {
+function insert(data) {
   for (let name of ["firstName", "lastName", "email", "phone", "zip"]) {
     const input = document.querySelector(`input[name="${name}"]`);
     if (input) {
       setValue(input, data[name]);
+    } else {
+      setTimeout(function() {
+        insert(data);
+      }, 1000);
+      return;
     }
   }
-});
+}
+
+browser.runtime.sendMessage({}).then(insert);
