@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Virtual Phone Bank <-> Mobilize",
   "description": "Auto-fills Mobilize event forms from Virtual Phone Bank contact info.",
-  "version": "1.2",
+  "version": "1.3",
   "icons": {
     "228": "icons/birdie.webp"
   },
